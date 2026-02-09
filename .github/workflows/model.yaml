@@ -1,0 +1,29 @@
+name: CI Workflow
+
+# on: [push, pull_request]
+on: [repository_dispatch, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          pip install platformdirs>=3.5.1
+          pip install tomli>=2.0.1
+          pip install setuptools>=58.5.0
+          pip install tox<4
+          pip install tox-pyenv
+          pip install tox-wheel
+
+      - name: Run tests
+        run: |
+          pytest

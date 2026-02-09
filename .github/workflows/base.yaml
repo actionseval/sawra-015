@@ -1,0 +1,23 @@
+name: Test with pytest
+# on: push
+on: [repository_dispatch, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        python-version:
+          - '3.12'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: |
+          apt install -y bash coreutils libc-bin libc6:amd64 libpython3.12-minimal:amd64 libpython3.12-stdlib:amd64 locales ncurses-base python3.12-minimal tzdata
+      - name: Execute Tests
+        run: |
+          pytest
