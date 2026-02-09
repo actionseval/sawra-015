@@ -17,6 +17,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Perform package installs
+        run: >-
+          pip install
+          .
+          pytest
+          pytest-cov
       - run: |
-          pip install platformdirs>=3.5.1 tomli>=2.0.1 setuptools>=58.5.0 tox<4 tox-pyenv tox-wheel
           pytest
