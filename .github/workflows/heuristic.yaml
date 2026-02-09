@@ -15,9 +15,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install Dependencies
-        run: |
-          sudo apt install -y bash coreutils libc-bin libc6:amd64 locales ncurses-base tzdata
+      - name: Perform package installs
+        run: >-
+          pip install
+          .
+          pytest
+          pytest-cov
       - run: |
           pytest
     env:
