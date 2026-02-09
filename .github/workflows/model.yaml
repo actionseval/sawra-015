@@ -15,14 +15,12 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
-        run: |
-          pip install platformdirs>=3.5.1
-          pip install tomli>=2.0.1
-          pip install setuptools>=58.5.0
-          pip install tox<4
-          pip install tox-pyenv
-          pip install tox-wheel
+      - name: Perform package installs
+        run: >-
+          pip install
+          .
+          pytest
+          pytest-cov
 
       - name: Run tests
         run: |
