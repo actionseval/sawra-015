@@ -10,8 +10,6 @@ jobs:
         run: |
           # apt install -y bash coreutils libc-bin libc6:amd64 libpython3.12-minimal:amd64 libpython3.12-stdlib:amd64 locales ncurses-base python3.12-minimal tzdata
           python -m pip install --upgrade --disable-pip-version-check pip
-          pip install .
-          pytest
-          pytest-cov
+          pip install . pytest pytest-cov
       - name: Run tests
         run: pytest
