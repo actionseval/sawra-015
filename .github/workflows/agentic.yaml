@@ -12,12 +12,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.x
+          python-version: 3.12
 
       - name: Install pytest
         run: |
+          python -m pip install --upgrade --disable-pip-version-check pip
+          pip install . pytest pytest-cov
           python -m pip install pytest
-
 
       - name: Run tests
         run: |
